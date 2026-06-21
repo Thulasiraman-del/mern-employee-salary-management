@@ -1,0 +1,26 @@
+{
+  "name": "mern-employee-salary-management",
+  "version": "1.0.0",
+  "description": "<H1 align =\"center\" > MERN EMPLOYEE SALARY MANAGEMENT </h1>\r <h5  align =\"center\">\r Fullstack open source employee salary management application made with MySql, Express, React & Nodejs (MERN) </h5>\r <br/>",
+  "main": "index.js",
+  "scripts": {
+  "test": "playwright test",
+  "test:report": "playwright show-report"
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Thulasiraman-del/mern-employee-salary-management.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Thulasiraman-del/mern-employee-salary-management/issues"
+  },
+  "homepage": "https://github.com/Thulasiraman-del/mern-employee-salary-management#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.61.0"
+  }
+}

@@ -1,0 +1,56 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install root dependencies
+        run: npm install
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Install Backend dependencies
+        run: cd Backend && npm install
+
+      - name: Install Frontend dependencies
+        run: cd Frontend && npm install
+
+      - name: Start Backend
+        run: cd Backend && npm start &
+        env:
+          APP_PORT: 5000
+          SESS_SECRET: testsecret123
+
+      - name: Start Frontend
+        run: cd Frontend && npm run dev &
+
+      - name: Wait for servers
+        run: sleep 15
+
+      - name: Run API tests
+        run: node tests/api/salary.test.mjs
+
+      - name: Run E2E tests
+        run: npx playwright test --config=playwright.config.mjs
+
+      - name: Upload test report
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/

@@ -20,9 +20,9 @@ const store = new sessionStore({
     db: db
 });
 
-/* (async() => {
+(async() => {
     await db.sync();
-})(); */
+})(); 
 
 dotenv.config();
 
