@@ -56,7 +56,11 @@ jobs:
         run: cd Frontend && npm run dev &
 
       - name: Wait for servers
-        run: sleep 20
+        run: sleep 30
+
+      - name: Seed admin user
+        run: |
+          mysql -h 127.0.0.1 -u root -prootpassword db_penggajian3 -e "INSERT INTO data_pegawai (id_pegawai, nik, nama_pegawai, username, password, jenis_kelamin, jabatan, tanggal_masuk, status, photo, url, hak_akses, createdAt, updatedAt) VALUES ('EMP001', '1234567890123456', 'Admin User', 'admin', '\$2b\$10\$wQxJEoS9Q5xKqGDNMEyZr.M0aYRW8PMlTQELJpGqhL6/0JtFGNHAm', 'Laki-laki', 'Admin', '2024-01-01', 'Aktif', 'photo.jpg', 'http://localhost:5000', 'admin', NOW(), NOW());" || true
 
       - name: Run API tests
         run: node tests/api/salary.test.mjs
